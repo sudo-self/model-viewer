@@ -235,7 +235,7 @@
     <main>
       <div class="model-container">
         <model-viewer
-          src="./batman.glb"
+          src="./assets/batman.glb"
           alt="Batman 3D Model"
           camera-controls
           auto-rotate
@@ -269,13 +269,13 @@
         <h2>2. Prepare Your 3D Model</h2>
         <p>Place your 3D model file (in .glb or .gltf format) in your project directory. Here's a typical project structure:</p>
 
-        <img src="./examples.png" alt="Project file structure example" width="400">
+        <img src="./assets/project.png" alt="Project file structure example" width="400">
 
         <pre><code class="language-plaintext">project-root/
 ├── index.html
 ├── assets/
-│   └── models/
-│       └── batman.glb    # 3D model file
+│   └── batmman.glb/ # <-- 3D model
+│       (GL Transmission Binary)
 ├── css/
 │   └── styles.css
 └── js/
@@ -289,7 +289,7 @@
         <div class="side-by-side">
           <div class="model-container">
             <model-viewer
-              src="./joker.glb"
+              src="./assets/joker.glb"
               alt="Joker 3D Model"
               camera-controls
               auto-rotate
@@ -301,7 +301,7 @@
           </div>
 
           <pre><code class="language-html">&lt;model-viewer
-  src="./models/batman.glb"
+  src="./assets/batman.glb"
   alt="Batman 3D model"
   camera-controls
   auto-rotate
