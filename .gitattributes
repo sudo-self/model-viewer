@@ -1,0 +1,2 @@
+batman.glb filter=lfs diff=lfs merge=lfs -text
+joker.glb filter=lfs diff=lfs merge=lfs -text
