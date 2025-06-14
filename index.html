@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Learn how to embed 3D models in HTML using model-viewer">
+  <title>Embedding 3D Models in HTML | A Developer's Guide</title>
+
+  <!-- Load model-viewer -->
+  <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --accent: #ec4899;
+      --light: #f8fafc;
+      --dark: #1e293b;
+      --gray: #64748b;
+      --light-gray: #e2e8f0;
+      --code-bg: #1e1e2e;
+      --border-radius: 8px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding-bottom: 1.5rem;
+      border-bottom: 1px solid var(--light-gray);
+    }
+
+    h1 {
+      color: var(--primary-dark);
+      font-size: 2.5rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+
+    .byline {
+      color: var(--gray);
+      font-size: 1.1rem;
+      font-weight: 400;
+      margin-top: 0;
+    }
+
+    h2 {
+      color: var(--primary-dark);
+      font-size: 1.75rem;
+      font-weight: 600;
+      margin: 3rem 0 1.5rem;
+      position: relative;
+      padding-bottom: 0.5rem;
+    }
+
+    h2:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 60px;
+      height: 3px;
+      background: var(--accent);
+      border-radius: 3px;
+    }
+
+    h4 {
+      color: var(--dark);
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin: 2rem 0 1rem;
+    }
+
+    p {
+      color: var(--dark);
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin: 1.25rem 0;
+    }
+
+    a {
+      color: var(--primary);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    a:hover {
+      color: var(--primary-dark);
+    }
+
+      model-viewer {
+        width: 100%;
+        height: 400px;
+        margin: 2rem 0;
+        background: transparent;
+        border-radius: 0;
+        box-shadow: none;
+        transition: none;
+      }
+
+      model-viewer:hover {
+        transform: none;
+        box-shadow: none;
+      }
+
+
+    .model-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 2rem 0;
+    }
+
+    .model-label {
+      font-size: 0.9rem;
+      color: var(--gray);
+      margin-top: 0.5rem;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      border-radius: var(--border-radius);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      margin: 1.5rem auto;
+    }
+
+    pre {
+      background: var(--code-bg);
+      padding: 1.5rem;
+      border-radius: var(--border-radius);
+      overflow-x: auto;
+      font-family: 'Roboto Mono', monospace;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: #e2e8f0;
+      margin: 1.5rem 0;
+      position: relative;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    pre code {
+      display: block;
+      padding: 0;
+      background: transparent;
+      color: inherit;
+      font-size: inherit;
+      line-height: inherit;
+    }
+
+    code:not(pre code) {
+      font-family: 'Roboto Mono', monospace;
+      background: rgba(99, 102, 241, 0.1);
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      font-size: 0.9em;
+      color: var(--primary);
+    }
+
+    .side-by-side {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin: 3rem 0;
+      align-items: start;
+    }
+
+    .note {
+      background: rgba(236, 72, 153, 0.05);
+      border-left: 3px solid var(--accent);
+      padding: 1rem 1.25rem;
+      margin: 1.5rem 0;
+      border-radius: 0 var(--border-radius) var(--border-radius) 0;
+    }
+
+    .note p {
+      margin: 0;
+      color: var(--dark);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 1px solid var(--light-gray);
+      color: var(--gray);
+      font-size: 0.95rem;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 1.5rem 1rem;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .side-by-side {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>3D Models in HTML</h1>
+      <p class="byline">A quick glance by sudo-self</p>
+    </header>
+
+    <main>
+      <div class="model-container">
+        <model-viewer
+          src="./batman.glb"
+          alt="Batman 3D Model"
+          camera-controls
+          auto-rotate
+          interaction-prompt="click"
+          min-camera-orbit="auto auto 100%"
+          max-camera-orbit="auto auto 100%"
+        ></model-viewer>
+        <span class="model-label">Batman by sudo-self</span>
+      </div>
+
+      <section>
+        <h2>Setup</h2>
+        <p>Embedding 3D models in your web projects has never been easier. With the <code>&lt;model-viewer&gt;</code> component, you can showcase interactive 3D content with just a few lines of HTML.</p>
+      </section>
+
+      <section>
+        <h2>1. Add the Model Viewer Script</h2>
+        <p>First, include the model-viewer script in your HTML document's <code>&lt;head&gt;</code> section:</p>
+
+        <pre><code class="language-html">&lt;!-- Load model-viewer from unpkg --&gt;
+&lt;script type="module"
+        src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"&gt;
+&lt;/script&gt;</code></pre>
+
+        <div class="note">
+          <p><strong>Note:</strong> The script must be loaded as a module, so the <code>type="module"</code> attribute is required.</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>2. Prepare Your 3D Model</h2>
+        <p>Place your 3D model file (in .glb or .gltf format) in your project directory. Here's a typical project structure:</p>
+
+        <img src="./examples.png" alt="Project file structure example" width="400">
+
+        <pre><code class="language-plaintext">project-root/
+├── index.html
+├── assets/
+│   └── models/
+│       └── batman.glb    # 3D model file
+├── css/
+│   └── styles.css
+└── js/
+    └── main.js</code></pre>
+      </section>
+
+      <section>
+        <h2>3. Embed Your 3D Model</h2>
+        <p>Add the <code>&lt;model-viewer&gt;</code> element to your HTML with the path to your model:</p>
+
+        <div class="side-by-side">
+          <div class="model-container">
+            <model-viewer
+              src="./joker.glb"
+              alt="Joker 3D Model"
+              camera-controls
+              auto-rotate
+              interaction-prompt="click"
+              min-camera-orbit="auto auto 100%"
+              max-camera-orbit="auto auto 100%"
+            ></model-viewer>
+            <span class="model-label">The Joker by sudo-self</span>
+          </div>
+
+          <pre><code class="language-html">&lt;model-viewer
+  src="./models/batman.glb"
+  alt="Batman 3D model"
+  camera-controls
+  auto-rotate
+  interaction-prompt="click"
+  style="width: 100%; height: 400px;"
+  min-camera-orbit="auto auto 100%"
+  max-camera-orbit="auto auto 100%"&gt;
+&lt;/model-viewer&gt;</code></pre>
+        </div>
+
+        <div class="note">
+          <p><strong>Tip:</strong> For best results, serve your HTML from a web server (even locally) as some features may not work with direct file access.</p>
+        </div>
+      </section>
+
+      <section>
+        <h2>Customization Options</h2>
+        <p>The <code>&lt;model-viewer&gt;</code> component offers numerous attributes for customization:</p>
+        
+        <pre><code class="language-html">&lt;model-viewer
+  src="Batman.glb"
+  alt="Description for accessibility"
+  camera-controls
+  auto-rotate
+  auto-rotate-delay="1000"
+  ar
+  shadow-intensity="1"
+  exposure="1"
+  environment-image="/hdr/studio.hdr"  <--- Using an .hdr for environmetal lighting
+  style="width: 100%; height: 500px;"&gt;
+&lt;/model-viewer&gt;</code></pre>
+      </section>
+    </main>
+    <div>
+    <model-viewer
+      src="./batman.glb"
+      alt="Batman 3D Model"
+      camera-controls
+      auto-rotate
+      ar
+      interaction-prompt="click"
+      shadow-intensity="1"
+      min-camera-orbit="auto auto 100%"
+      max-camera-orbit="auto auto 100%"
+      environment-image="./studio.hdr"
+      exposure="1"
+    ></model-viewer>
+    </div>
+
+    <footer>
+      <p>&copy; 2025 github.com/sudo-self/modelviewer</p>
+      <p>Powered by <a href="https://modelviewer.dev/" target="_blank">model-viewer</a></p>
+    </footer>
+  </div>
+</body>
+</html>
